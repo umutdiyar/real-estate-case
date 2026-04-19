@@ -1,5 +1,5 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { TransactionStage } from 'src/common/enums/transaction-stage.enum';
+import { TransactionStage } from '../../common/enums/transaction-stage.enum';
 
 @Injectable()
 export class StageTransitionService {
