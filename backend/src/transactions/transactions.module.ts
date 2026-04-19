@@ -5,6 +5,7 @@ import { TransactionsController } from './transactions.controller';
 import { TransactionsService } from './transactions.service';
 import { CommissionCalculatorService } from './services/commission-calculator.service';
 import { StageTransitionService } from './services/stage-transition.service';
+import { AgentsModule } from 'src/agents/agents.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { StageTransitionService } from './services/stage-transition.service';
         schema: TransactionSchema,
       },
     ]),
+    AgentsModule,
   ],
   controllers: [TransactionsController],
   providers: [

@@ -1,14 +1,14 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { Document } from 'mongoose';
 
-export type AgentDocument = HydratedDocument<Agent>;
+export type AgentDocument = Agent & Document;
 
 @Schema({ timestamps: true })
 export class Agent {
-  @Prop({ required: true, trim: true })
+  @Prop({ required: true })
   fullName!: string;
 
-  @Prop({ required: true, unique: false, lowercase: true })
+  @Prop()
   email?: string;
 
   @Prop({ default: true })
