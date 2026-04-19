@@ -7,7 +7,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Transaction, TransactionDocument } from './schemas/transaction.schema';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
-import { AgentsService } from 'src/agents/agents.service';
+import { AgentsService } from '../agents/agents.service';
 import { CommissionCalculatorService } from './services/commission-calculator.service';
 import { StageTransitionService } from './services/stage-transition.service';
 import { UpdateTransactionStageDto } from './dto/update-transaction-stage.dto';

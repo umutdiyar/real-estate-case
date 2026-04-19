@@ -7,21 +7,21 @@ describe('CommissionCalculatorService', () => {
     service = new CommissionCalculatorService();
   });
 
-  it('should calculate correctly when agents are different', () => {
-    const result = service.calculate(10000, 'a', 'b');
+  it('should split commission equally when agents are different', () => {
+    const result = service.calculate(10000, 'agent-1', 'agent-2');
 
     expect(result.agencyAmount).toBe(5000);
+    expect(result.totalAgentAmount).toBe(5000);
     expect(result.listingAgentAmount).toBe(2500);
     expect(result.sellingAgentAmount).toBe(2500);
-    expect(result.totalAgentAmount).toBe(5000);
   });
 
-  it('should calculate correctly when agents are the same', () => {
-    const result = service.calculate(10000, 'a', 'a');
+  it('should assign full agent portion to one agent when both roles belong to same person', () => {
+    const result = service.calculate(10000, 'agent-1', 'agent-1');
 
     expect(result.agencyAmount).toBe(5000);
+    expect(result.totalAgentAmount).toBe(5000);
     expect(result.listingAgentAmount).toBe(5000);
     expect(result.sellingAgentAmount).toBe(0);
-    expect(result.totalAgentAmount).toBe(5000);
   });
 });

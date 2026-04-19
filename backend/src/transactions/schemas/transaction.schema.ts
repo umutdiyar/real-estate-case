@@ -38,6 +38,7 @@ export class Transaction {
   propertyAddress!: string;
 
   @Prop({
+    type: String,
     required: true,
     enum: Object.values(TransactionType),
   })
@@ -61,7 +62,7 @@ export class Transaction {
   sellingAgentId!: Types.ObjectId;
 
   @Prop({
-    required: true,
+    type: String,
     enum: Object.values(TransactionStage),
     default: TransactionStage.AGREEMENT,
   })
