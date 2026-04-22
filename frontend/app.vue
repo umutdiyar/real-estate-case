@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-slate-50">
     <header class="border-b bg-white">
       <div
-        class="mx-auto flex items-center justify-between max-w-7xl px-6 py-4"
+        class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4"
       >
         <div>
           <h1 class="text-xl font-semibold text-slate-900">
@@ -11,20 +11,18 @@
           <p class="text-sm text-slate-500">İşlemler ve komisyon yönetimi</p>
         </div>
 
-        <nax class="flex items-center gap-3">
-          <NuxtLink
-            to="/"
-            class="rounded-lg px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
-          >
+        <nav class="flex items-center gap-3">
+          <NuxtLink to="/" class="rounded-lg px-4 py-2 text-sm">
             Dashboard
           </NuxtLink>
 
           <NuxtLink
-            class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-800"
+            to="/transactions/new"
+            class="rounded-lg bg-slate-900 px-4 py-2 text-sm text-white"
           >
             Yeni İşlem
           </NuxtLink>
-        </nax>
+        </nav>
       </div>
     </header>
 
