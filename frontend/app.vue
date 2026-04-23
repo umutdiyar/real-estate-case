@@ -6,9 +6,11 @@
       >
         <div>
           <h1 class="text-xl font-semibold text-slate-900">
-            Gayrimenkul İşlemleri
+            Real Estate Transactions
           </h1>
-          <p class="text-sm text-slate-500">İşlemler ve komisyon yönetimi</p>
+          <p class="text-sm text-slate-500">
+            Transaction and Commission Management
+          </p>
         </div>
 
         <nav class="flex items-center gap-3">
@@ -20,7 +22,7 @@
             to="/transactions/new"
             class="rounded-lg bg-slate-900 px-4 py-2 text-sm text-white"
           >
-            Yeni İşlem
+            + Create New Transactions
           </NuxtLink>
         </nav>
       </div>

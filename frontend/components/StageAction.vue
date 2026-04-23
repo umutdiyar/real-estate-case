@@ -32,5 +32,5 @@ const handleMove = async () => {
     Şuraya git {{ nextStage.replace("_", " ") }}
   </button>
 
-  <span v-else class="text-sm font-medium text-emerald-700"> Tamamlandı </span>
+  <span v-else class="text-sm font-medium text-emerald-700"> Completed </span>
 </template>

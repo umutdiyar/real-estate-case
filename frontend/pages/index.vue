@@ -17,10 +17,10 @@ onMounted(async () => {
       class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between"
     >
       <div>
-        <h2 class="text-2xl font-semibold text-slate-900">İşlemler</h2>
+        <h2 class="text-2xl font-semibold text-slate-900">Transactions</h2>
         <p class="text-sm text-slate-500">
-          Yaşam döngüsü aşamalarını takip edin ve komisyon bazlı gayrimenkul
-          işlemlerini yönetin.
+          Track lifecycle stages and manage commission-based real estate
+          transactions.
         </p>
       </div>
 
@@ -28,7 +28,7 @@ onMounted(async () => {
         to="/transactions/new"
         class="inline-flex w-fit rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-800"
       >
-        Yeni İşlem Oluştur
+        + Create New Transactions
       </NuxtLink>
     </div>
 
@@ -42,7 +42,7 @@ onMounted(async () => {
       v-if="transactionsStore.loading"
       class="rounded-2xl border border-slate-200 bg-white p-8 text-center text-slate-500 shadow-sm"
     >
-      İşlemler yükleniyor...
+      Transactions are loading...
     </div>
 
     <div
@@ -56,9 +56,9 @@ onMounted(async () => {
       v-else-if="transactionsStore.transactions.length === 0"
       class="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center shadow-sm"
     >
-      <h3 class="text-lg font-semibold text-slate-900">İşlem bulunamadı!</h3>
+      <h3 class="text-lg font-semibold text-slate-900">No Results Found!</h3>
       <p class="mt-2 text-sm text-slate-500">
-        İlk işleminizi oluşturarak başlayın ve işlemlerini yönetin.
+        Start by creating your first transaction and manage your transactions.
       </p>
     </div>
 

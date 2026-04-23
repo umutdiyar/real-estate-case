@@ -27,12 +27,12 @@ const formatCurrency = (value: number) => {
       <table class="min-w-full text-sm">
         <thead class="bg-slate-50 text-slate-600">
           <tr>
-            <th class="px-4 py-3 text-left font-semibold">Başlık</th>
-            <th class="px-4 py-3 text-left font-semibold">Mülk</th>
-            <th class="px-4 py-3 text-left font-semibold">Aşamalar</th>
-            <th class="px-4 py-3 text-left font-semibold">Temsilciler</th>
-            <th class="px-4 py-3 text-left font-semibold">Hizmet Ücreti</th>
-            <th class="px-4 py-3 text-left font-semibold">İşlemler</th>
+            <th class="px-4 py-3 text-left font-semibold">Title</th>
+            <th class="px-4 py-3 text-left font-semibold">Property Address</th>
+            <th class="px-4 py-3 text-left font-semibold">Transaction Type</th>
+            <th class="px-4 py-3 text-left font-semibold">Service Fee</th>
+            <th class="px-4 py-3 text-left font-semibold">Listing Agent</th>
+            <th class="px-4 py-3 text-left font-semibold">Selling Acent</th>
           </tr>
         </thead>
 
@@ -76,7 +76,7 @@ const formatCurrency = (value: number) => {
                   :to="`/transactions/${transaction._id}`"
                   class="text-sm font-medium text-blue-600 hover:underline"
                 >
-                  Ayrıntıları Görüntüle
+                  View Details
                 </NuxtLink>
 
                 <StageAction :transaction="transaction" />

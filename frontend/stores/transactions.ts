@@ -62,5 +62,23 @@ export const useTransactionsStore = defineStore("transactions", {
         this.error = error?.data?.message || "Aşamalar güncellenemedi!";
       }
     },
+
+    async createTransaction(payload: {
+      title: string;
+      propertyAddress: string;
+      transactionType: "sale" | "rental";
+      totalServiceFee: number;
+      listingAgentId: string;
+      sellingAgentId: string;
+    }) {
+      const { request } = useApi();
+
+      await request("/transactions", {
+        method: "POST",
+        body: payload,
+      });
+
+      await this.fetchTransactions();
+    },
   },
 });

@@ -2,21 +2,23 @@
   <section class="space-y-4">
     <div class="flex justify-between">
       <div>
-        <h2 class="text-2xl font-semibold text-slate-900">İşlem Detayları</h2>
+        <h2 class="text-2xl font-semibold text-slate-900">
+          Transaction Details
+        </h2>
         <p class="text-sm text-slate-500">
-          Ayrıntılı işlem detayları ve komisyon dökümü.
+          Detailed transaction information and commission breakdown.
         </p>
       </div>
       <NuxtLink to="/">
         <button
           class="text-slate-600 cursor-pointer mt-2 transition-all duration-300 ease-in-out hover:text-slate-900 hover:underline hover:-translate-x-1"
         >
-          ← Geri dön
+          ← Go Back
         </button>
       </NuxtLink>
     </div>
 
-    <div v-if="store.loading" class="text-slate-500">Yükleniyor...</div>
+    <div v-if="store.loading" class="text-slate-500">Loading...</div>
 
     <div v-if="store.error" class="text-red-500">
       {{ store.error }}
@@ -45,7 +47,7 @@
       </div>
 
       <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="mb-4 font-semibold text-lg text-slate-900">Yaşam Döngüsü</h3>
+        <h3 class="mb-4 font-semibold text-lg text-slate-900">Lifecycle</h3>
 
         <StageTimeline :current="store.selectedTransaction.stage" />
       </div>
