@@ -7,10 +7,14 @@ import { LayoutDashboard, PlusCircle } from "lucide-vue-next";
       <aside
         class="hidden w-64 border-r border-slate-200 bg-white lg:flex lg:flex-col"
       >
-        <div class="border-b border-slate-200 px-6 py-6">
-          <h1 class="text-lg font-semibold text-slate-900">Real Estate Case</h1>
-          <p class="mt-1 text-sm text-slate-500">Transaction Operations</p>
-        </div>
+        <NuxtLink to="/">
+          <div class="border-b border-slate-200 px-6 py-6">
+            <h1 class="text-lg font-semibold text-slate-900">
+              Real Estate Case
+            </h1>
+            <p class="mt-1 text-sm text-slate-500">Transaction Operations</p>
+          </div>
+        </NuxtLink>
 
         <nav class="flex-1 space-y-2 px-4 py-6">
           <NuxtLink
@@ -34,7 +38,7 @@ import { LayoutDashboard, PlusCircle } from "lucide-vue-next";
       <div class="flex min-h-screen flex-1 flex-col">
         <header class="border-b border-slate-200 bg-white">
           <div
-            class="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4"
+            class="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-4"
           >
             <div>
               <h2 class="text-base font-semibold text-slate-900">

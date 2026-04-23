@@ -52,10 +52,11 @@ const recentTransactions = computed(() =>
 </script>
 <template>
   <section class="space-y-8">
-    <div>
-      <h1 class="text-2xl font-semibold text-slate-900">Dashboard</h1>
+    <div class="mb-6">
+      <h1 class="text-2xl font-semibold">Dashboard</h1>
       <p class="mt-1 text-sm text-slate-500">
-        Monitor transaction progress and operational performance.
+        Tracking {{ transactionsStore.transactions.length }} transactions across
+        lifecycle stages
       </p>
     </div>
 
@@ -87,7 +88,7 @@ const recentTransactions = computed(() =>
 
     <div
       v-if="transactionsStore.loading"
-      class="rounded-2xl border border-slate-200 bg-white p-8 text-center text-slate-500 shadow-sm"
+      class="text-center py-10 text-sm text-slate-500"
     >
       Loading dashboard data...
     </div>

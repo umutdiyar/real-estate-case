@@ -159,14 +159,22 @@ const scenarioDescription = computed(() =>
       </div>
     </div>
 
-    <!-- EXPLANATION -->
-    <div class="mt-6 rounded-xl bg-blue 50 p-4">
-      <p class="text-xs font-semibold uppercase tracking-wide text-blue-900">
-        Calculation Note
+    <div class="mt-6 rounded-xl bg-slate-50 p-4">
+      <p class="text-xs font-semibold uppercase text-slate-500">
+        Commission Policy
       </p>
       <p class="mt-2 text-sm leading-6 text-blue-900">
         {{ breakdown.explanation }}
       </p>
+
+      <ul class="mt-2 text-sm text-slate-600 space-y-1">
+        <li>• 50% of the total service fee goes to the agency</li>
+        <li>• 50% is distributed among agents</li>
+        <li v-if="isSameAgent">• Same agent receives the full agent share</li>
+        <li v-else>
+          • Agent share is split equally between listing and selling agents
+        </li>
+      </ul>
     </div>
   </div>
 </template>

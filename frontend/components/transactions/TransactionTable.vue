@@ -57,14 +57,14 @@ const handleStageChange = async (transaction: Transaction) => {
   >
     <div class="overflow-x-auto">
       <table class="min-w-full text-sm">
-        <thead class="bg-slate-50 text-slate-600">
+        <thead class="bg-slate-50 text-xs uppercase text-slate-500">
           <tr>
-            <th class="px-4 py-3 text-left font-semibold">Title</th>
-            <th class="px-4 py-3 text-left font-semibold">Property Address</th>
-            <th class="px-4 py-3 text-left font-semibold">Transaction Type</th>
-            <th class="px-4 py-3 text-left font-semibold">Service Fee</th>
-            <th class="px-4 py-3 text-left font-semibold">Listing Agent</th>
-            <th class="px-4 py-3 text-left font-semibold">Selling Acent</th>
+            <th class="px-4 py-3">Property</th>
+            <th class="px-4 py-3">Location</th>
+            <th class="px-4 py-3">Stage</th>
+            <th class="px-4 py-3">Service Fee</th>
+            <th class="px-4 py-3">Agents</th>
+            <th class="px-4 py-3">Actions</th>
           </tr>
         </thead>
 
@@ -72,7 +72,7 @@ const handleStageChange = async (transaction: Transaction) => {
           <tr
             v-for="transaction in transactions"
             :key="transaction._id"
-            class="border-t border-slate-100 hover:bg-slate-50"
+            class="border-t border-slate-100 hover:bg-slate-50 transition"
           >
             <td class="px-4 py-4">
               <div class="font-semibold text-slate-900">
@@ -91,6 +91,9 @@ const handleStageChange = async (transaction: Transaction) => {
               <StageBadge :stage="transaction.stage" />
             </td>
 
+            <td class="px-4 py-4 font-medium text-slate-800">
+              {{ formatCurrency(transaction.totalServiceFee) }}
+            </td>
             <td class="px-4 py-4 text-slate-600">
               <div>Listing: {{ getAgentName(transaction.listingAgentId) }}</div>
               <div class="mt-1">
@@ -98,15 +101,11 @@ const handleStageChange = async (transaction: Transaction) => {
               </div>
             </td>
 
-            <td class="px-4 py-4 font-medium text-slate-800">
-              {{ formatCurrency(transaction.totalServiceFee) }}
-            </td>
-
             <td class="px-4 py-4">
               <div class="flex flex-col items-center gap-2 text-center">
                 <NuxtLink
                   :to="`/transactions/${transaction._id}`"
-                  class="text-sm font-medium text-blue-600 transition hover:underline"
+                  class="text-sm font-medium text-slate-800 transition hover:underline"
                 >
                   View Details
                 </NuxtLink>

@@ -64,7 +64,7 @@ const handleSubmit = async () => {
 <template>
   <form
     @submit.prevent="handleSubmit"
-    class="space-y-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+    class="space-y-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
   >
     <h3 class="text-lg font-semibold text-slate-900">Create Transaction</h3>
 
@@ -128,7 +128,7 @@ const handleSubmit = async () => {
 
     <!-- Button -->
     <button
-      class="w-full rounded-lg bg-slate-900 py-2 text-white"
+      class="w-full rounded-lg bg-slate-900 py-2 text-white hover:bg-slate-700"
       :disabled="loading"
     >
       {{ loading ? "Creating..." : "Create Transaction" }}
