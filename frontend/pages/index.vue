@@ -1,48 +1,95 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { onMounted, computed } from "vue";
 import { useTransactionsStore } from "../stores/transactions";
-import DashboardStats from "~/components/DashboardStats.vue";
-import TransactionTable from "~/components/TransactionTable.vue";
+import TransactionTable from "~/components/transactions/TransactionTable.vue";
 
 const transactionsStore = useTransactionsStore();
 
 onMounted(async () => {
   await transactionsStore.fetchTransactions();
 });
+
+const formatCurrency = (value: number) =>
+  new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(value);
+
+const agreementCount = computed(
+  () =>
+    transactionsStore.transactions.filter((t) => t.stage === "agreement")
+      .length,
+);
+
+const earnestMoneyCount = computed(
+  () =>
+    transactionsStore.transactions.filter((t) => t.stage === "earnest_money")
+      .length,
+);
+
+const titleDeedCount = computed(
+  () =>
+    transactionsStore.transactions.filter((t) => t.stage === "title_deed")
+      .length,
+);
+
+const completedCount = computed(
+  () =>
+    transactionsStore.transactions.filter((t) => t.stage === "completed")
+      .length,
+);
+
+const inProgressCount = computed(
+  () =>
+    transactionsStore.transactions.filter((t) => t.stage !== "completed")
+      .length,
+);
+
+const recentTransactions = computed(() =>
+  transactionsStore.transactions.slice(0, 5),
+);
 </script>
-
 <template>
-  <section class="space-y-6">
-    <div
-      class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between"
-    >
-      <div>
-        <h2 class="text-2xl font-semibold text-slate-900">Transactions</h2>
-        <p class="text-sm text-slate-500">
-          Track lifecycle stages and manage commission-based real estate
-          transactions.
-        </p>
-      </div>
-
-      <NuxtLink
-        to="/transactions/new"
-        class="inline-flex w-fit rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-800"
-      >
-        + Create New Transactions
-      </NuxtLink>
+  <section class="space-y-8">
+    <div>
+      <h1 class="text-2xl font-semibold text-slate-900">Dashboard</h1>
+      <p class="mt-1 text-sm text-slate-500">
+        Monitor transaction progress and operational performance.
+      </p>
     </div>
 
-    <DashboardStats
-      :total-transactions="transactionsStore.transactions.length"
-      :completed-count="transactionsStore.completedCount"
-      :total-volume="transactionsStore.totalVolume"
-    />
+    <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <StatsCard
+        title="Total Transactions"
+        :value="transactionsStore.transactions.length"
+        description="All tracked records"
+      />
+
+      <StatsCard
+        title="Completed Transactions"
+        :value="completedCount"
+        description="Transactions closed successfully"
+      />
+
+      <StatsCard
+        title="In Progress"
+        :value="inProgressCount"
+        description="Transactions still moving through stages"
+      />
+
+      <StatsCard
+        title="Total Service Volume"
+        :value="formatCurrency(transactionsStore.totalVolume)"
+        description="Sum of all service fees"
+      />
+    </div>
 
     <div
       v-if="transactionsStore.loading"
       class="rounded-2xl border border-slate-200 bg-white p-8 text-center text-slate-500 shadow-sm"
     >
-      Transactions are loading...
+      Loading dashboard data...
     </div>
 
     <div
@@ -56,12 +103,61 @@ onMounted(async () => {
       v-else-if="transactionsStore.transactions.length === 0"
       class="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center shadow-sm"
     >
-      <h3 class="text-lg font-semibold text-slate-900">No Results Found!</h3>
+      <h3 class="text-lg font-semibold text-slate-900">No transactions yet</h3>
       <p class="mt-2 text-sm text-slate-500">
-        Start by creating your first transaction and manage your transactions.
+        Create your first transaction to start tracking lifecycle and
+        commissions.
       </p>
     </div>
 
-    <TransactionTable v-else :transactions="transactionsStore.transactions" />
+    <template v-else>
+      <div class="grid gap-6 xl:grid-cols-[2fr_1fr]">
+        <TransactionTable :transactions="transactionsStore.transactions" />
+
+        <div class="space-y-6">
+          <StageDistChart
+            :agreement="agreementCount"
+            :earnestMoney="earnestMoneyCount"
+            :titleDeed="titleDeedCount"
+            :completed="completedCount"
+          />
+
+          <div
+            class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+          >
+            <div class="mb-4">
+              <h3 class="text-base font-semibold text-slate-900">
+                Recent Transactions
+              </h3>
+              <p class="text-sm text-slate-500">
+                Latest activity in the system
+              </p>
+            </div>
+
+            <div class="space-y-3">
+              <NuxtLink
+                v-for="transaction in recentTransactions"
+                :key="transaction._id"
+                :to="`/transactions/${transaction._id}`"
+                class="block rounded-xl border border-slate-100 p-4 transition hover:bg-slate-50"
+              >
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <p class="font-medium text-slate-900">
+                      {{ transaction.title }}
+                    </p>
+                    <p class="mt-1 text-sm text-slate-500">
+                      {{ transaction.propertyAddress }}
+                    </p>
+                  </div>
+
+                  <StageBadge :stage="transaction.stage" />
+                </div>
+              </NuxtLink>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
   </section>
 </template>

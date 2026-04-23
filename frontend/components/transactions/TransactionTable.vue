@@ -1,9 +1,15 @@
 <script setup lang="ts">
-import type { Transaction, TransactionAgentRef } from "~/types/transaction";
+import type {
+  Transaction,
+  TransactionAgentRef,
+  TransactionStage,
+} from "~/types/transaction";
 
 defineProps<{
   transactions: Transaction[];
 }>();
+
+const store = useTransactionsStore();
 
 const getAgentName = (agent: string | TransactionAgentRef) => {
   if (typeof agent === "string") return agent;
@@ -11,11 +17,37 @@ const getAgentName = (agent: string | TransactionAgentRef) => {
 };
 
 const formatCurrency = (value: number) => {
-  return new Intl.NumberFormat("tr-TR", {
+  return new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "TRY",
+    currency: "USD",
     maximumFractionDigits: 0,
   }).format(value);
+};
+
+const nextStageMap: Record<string, TransactionStage | null> = {
+  agreement: "earnest_money",
+  earnest_money: "title_deed",
+  title_deed: "completed",
+  completed: null,
+};
+
+const nextStageLabelMap: Record<string, string> = {
+  earnest_money: "Earnest Money",
+  title_deed: "Title Deed",
+  completed: "Completed",
+};
+
+const nextStageLabel = (stage: string) => {
+  const next = nextStageMap[stage];
+  if (!next) return "";
+  return nextStageLabelMap[next];
+};
+
+const handleStageChange = async (transaction: Transaction) => {
+  const nextStage = nextStageMap[transaction.stage];
+  if (!nextStage) return;
+
+  await store.updateStage(transaction._id, nextStage);
 };
 </script>
 
@@ -71,15 +103,25 @@ const formatCurrency = (value: number) => {
             </td>
 
             <td class="px-4 py-4">
-              <div class="flex flex-col gap-2">
+              <div class="flex flex-col items-center gap-2 text-center">
                 <NuxtLink
                   :to="`/transactions/${transaction._id}`"
-                  class="text-sm font-medium text-blue-600 hover:underline"
+                  class="text-sm font-medium text-blue-600 transition hover:underline"
                 >
                   View Details
                 </NuxtLink>
 
-                <StageAction :transaction="transaction" />
+                <button
+                  v-if="transaction.stage !== 'completed'"
+                  @click="handleStageChange(transaction)"
+                  class="w-[160px] rounded-lg bg-slate-900 px-4 py-2 text-xs font-medium text-white transition hover:bg-slate-800"
+                >
+                  Move to {{ nextStageLabel(transaction.stage) }}
+                </button>
+
+                <span v-else class="text-xs font-semibold text-emerald-600">
+                  Completed
+                </span>
               </div>
             </td>
           </tr>

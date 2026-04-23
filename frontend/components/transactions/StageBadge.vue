@@ -9,12 +9,19 @@ const colorMap: Record<string, string> = {
   title_deed: "bg-blue-100 text-blue-800",
   completed: "bg-emerald-100 text-emerald-800",
 };
+
+const labelMap: Record<string, string> = {
+  agreement: "Agreement",
+  earnest_money: "Earnest Money",
+  title_deed: "Title Deed",
+  completed: "Completed",
+};
 </script>
 <template>
   <span
     class="inline-flex rounded-full px-3 py-1 text-xs font-semibold capitalize"
     :class="colorMap[stage] || 'bg-slate-200 text-slate-800'"
   >
-    {{ stage.replace("_", " ") }}
+    {{ labelMap[stage] || stage }}
   </span>
 </template>
