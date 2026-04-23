@@ -49,14 +49,15 @@ import { LayoutDashboard, PlusCircle } from "lucide-vue-next";
               to="/transactions/new"
               class="inline-flex rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-800"
             >
-              New Transaction
+              + New Transaction
             </NuxtLink>
           </div>
         </header>
 
-        <main class="mx-auto w-full max-w-[1600px] flex-1 px-6 py-8">
+        <main class="mx-auto w-full max-w-[1600px] flex-1 px-8 py-8">
           <NuxtPage />
         </main>
+        <ToastMessage />
       </div>
     </div>
   </div>

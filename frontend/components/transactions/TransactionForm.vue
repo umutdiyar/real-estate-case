@@ -3,6 +3,9 @@ import { ref, onMounted } from "vue";
 import { useTransactionsStore } from "~/stores/transactions";
 import { useAgentsStore } from "~/stores/agents";
 import { useRouter } from "vue-router";
+import { useUiStore } from "~/stores/ui";
+
+const uiStore = useUiStore();
 
 const txStore = useTransactionsStore();
 const agentStore = useAgentsStore();
@@ -46,12 +49,12 @@ const handleSubmit = async () => {
 
   try {
     loading.value = true;
-
     await txStore.createTransaction(form.value);
-
+    uiStore.showToast("Transaction created successfully", "success");
     router.push("/");
-  } catch (e) {
+  } catch {
     error.value = "Failed to create transaction";
+    uiStore.showToast("Failed to create transaction", "error");
   } finally {
     loading.value = false;
   }

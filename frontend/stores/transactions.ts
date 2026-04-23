@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import type { Transaction, TransactionStage } from "~/types/transaction";
+import { useUiStore } from "~/stores/ui";
 
 export const useTransactionsStore = defineStore("transactions", {
   state: () => ({
@@ -50,6 +51,7 @@ export const useTransactionsStore = defineStore("transactions", {
 
     async updateStage(id: string, stage: TransactionStage) {
       const { request } = useApi();
+      const uiStore = useUiStore();
 
       try {
         await request(`/transactions/${id}/stage`, {
@@ -58,8 +60,15 @@ export const useTransactionsStore = defineStore("transactions", {
         });
 
         await this.fetchTransactions();
+
+        if (this.selectedTransaction?._id === id) {
+          await this.fetchTransactionById(id);
+        }
+
+        uiStore.showToast("Transaction stage updated successfully", "success");
       } catch (error: any) {
-        this.error = error?.data?.message || "Aşamalar güncellenemedi!";
+        this.error = error?.data?.message || "Failed to update stage";
+        uiStore.showToast("Failed to update transaction stage", "error");
       }
     },
 
