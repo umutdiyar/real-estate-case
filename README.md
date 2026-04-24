@@ -10,6 +10,7 @@ It is built as part of a technical case using NestJS, MongoDB Atlas, and Nuxt 3.
 
 Frontend: https://real-estate-web-case.vercel.app/  
 Backend API: https://real-estate-case-production.up.railway.app/transactions  
+API Docs (Swagger): https://real-estate-case-production.up.railway.app/api/docs
 
 ---
 
