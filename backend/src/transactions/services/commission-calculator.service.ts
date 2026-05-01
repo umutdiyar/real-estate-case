@@ -17,7 +17,7 @@ export class CommissionCalculatorService {
         sellingAgentAmount: 0,
         totalAgentAmount,
         explanation:
-          'Emlak ilanı ve satış temsilcisi aynı kişidir. Tüm komisyon tek bir temsilciye tahsis edilmiştir.',
+          'The person responsible for the real estate listing is the same as the sales representative. The entire commission is paid to a single representative.',
         calculatedAt: new Date(),
       };
     }
@@ -30,7 +30,7 @@ export class CommissionCalculatorService {
       sellingAgentAmount: half,
       totalAgentAmount,
       explanation:
-        'Komisyon payı, ilan veren ve satış yapan emlakçılar arasında eşit olarak bölündü.',
+        'The commission is split equally between the listing and selling agents.',
       calculatedAt: new Date(),
     };
   }
