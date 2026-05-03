@@ -50,7 +50,7 @@
               <div>
                 <p class="text-sm text-slate-500">Transaction Type</p>
                 <p class="mt-1 font-medium capitalize text-slate-900">
-                  {{ store.selectedTransaction.type }}
+                  {{ store.selectedTransaction.transactionType }}
                 </p>
               </div>
 
